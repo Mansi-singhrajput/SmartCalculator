@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Cylinder Booking System | Online LPG Gas Booking & Tracking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       SMART CYLINDER BOOKING SYSTEM - SELF-CONTAINED MASTER DESIGN SYSTEM
+       Frontend & UI/UX Design Lead: Avanya Sinha
+       Database Engineering & SQL: Mansi Kumari
+       Backend Java Processing: Deepshikha Kumari
+       System Analysis: Chanchal Goyal | Testing & QA: Kashish Kumari
+       ========================================================================== */
+    :root {
+      --primary: #f05a28;
+      --primary-hover: #d94918;
+      --primary-light: #fff0eb;
+      --primary-glow: rgba(240, 90, 40, 0.25);
+      
+      --secondary: #1e3a8a;
+      --secondary-hover: #172554;
+      --secondary-light: #eff6ff;
+
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --warning: #f59e0b;
+      --warning-light: #fffbeb;
+      --danger: #ef4444;
+      --danger-light: #fef2f2;
+      --info: #0ea5e9;
+      --info-light: #f0f9ff;
+
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    section[id] {
+      scroll-margin-top: 80px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .brand-logo span.logo-icon {
+      font-size: 28px;
+      background: var(--primary-light);
+      padding: 6px 10px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 4px var(--primary-glow);
+    }
+
+    .brand-logo strong {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 4px var(--primary-glow);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 12px var(--primary-glow);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border-color);
+      color: var(--text-dark);
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary-hover);
+    }
+
+    .btn-secondary-subtle {
+      background: var(--secondary-light);
+      color: var(--secondary);
+      border-color: #bfdbfe;
+    }
+
+    .btn-secondary-subtle:hover {
+      background: #dbeafe;
+    }
+
+    .btn-lg {
+      padding: 14px 26px;
+      font-size: 16px;
+      border-radius: var(--radius-lg);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 40%, #ffffff 100%);
+      padding: 64px 0 54px;
+      border-bottom: 1px solid #fed7aa;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffedd5;
+      color: #c2410c;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid #fdba74;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 800;
+      color: #1c1917;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: #475569;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .stat-item h3 {
+      font-size: 28px;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .stat-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 60px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 40px;
+    }
+
+    .section-header h2 {
+      font-size: 32px;
+      color: #0f172a;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* Catalog Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .cylinder-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cylinder-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+      border-color: #fdba74;
+    }
+
+    .cylinder-card.featured {
+      border: 2px solid var(--primary);
+      box-shadow: 0 10px 25px -5px var(--primary-glow);
+    }
+
+    .cylinder-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .cylinder-card h3 {
+      font-size: 20px;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .weight-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--secondary);
+      background: var(--secondary-light);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .price {
+      font-size: 30px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .price span {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .subsidy-note {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 20px;
+      min-height: 20px;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .features-list li {
+      font-size: 13px;
+      color: #475569;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px dashed #f1f5f9;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-popular {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px var(--primary-glow);
+    }
+
+    .badge-confirmed {
+      background: var(--info-light);
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge-delivered {
+      background: var(--success-light);
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    .badge-dispatched {
+      background: var(--warning-light);
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    /* Key Features Section */
+    .features-section {
+      background: #ffffff;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card-clickable {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature-card-clickable:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px -3px var(--primary-glow);
+    }
+
+    .feature-card-clickable h4 {
+      font-size: 18px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .feature-card-clickable p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .feature-action-btn {
+      margin-top: auto;
+      padding-top: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Safety Grid */
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .safety-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .safety-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .safety-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .safety-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Project Team */
+    .team-section {
+      background: #f8fafc;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .team-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      border: 2px solid #fed7aa;
+    }
+
+    .team-card h4 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .team-card span {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    /* Footer */
+    .footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 36px 0;
+      margin-top: auto;
+      border-top: 1px solid #1e293b;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Modals Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: var(--shadow-xl);
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalSlide 0.25s ease-out;
+    }
+
+    @keyframes modalSlide {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      color: #64748b;
+    }
+
+    .close-modal-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    /* Toast */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastIn 0.3s ease;
+      min-width: 260px;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Order Tracking Stepper */
+    .stepper {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      position: relative;
+    }
+
+    .step-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+      border: 2px solid #e2e8f0;
+      z-index: 2;
+    }
+
+    .step-item.active .step-icon {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-glow);
+    }
+
+    .step-item.completed .step-icon {
+      background: var(--success);
+      color: #ffffff;
+      border-color: var(--success);
+    }
+
+    .step-info h5 {
+      font-size: 14px;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .step-info p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Print styles for Invoice */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #invoice-modal, #invoice-modal * {
+        visibility: visible;
+      }
+      #invoice-modal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white;
+      }
+      .modal-card {
+        box-shadow: none;
+        border: none;
+        max-width: 100%;
+        padding: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hero-title {
+        font-size: 28px;
+      }
+      .hero-stats {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+        <span class="logo-icon">🔥</span>
+        <span class="logo-text">Smart<strong>Cylinder</strong></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#services" onclick="scrollToSection(event, 'services')">Cylinder Catalog</a>
+        <a href="#features" onclick="scrollToSection(event, 'features')" style="color: var(--primary); font-weight: 700;">✨ Key Features</a>
+        <a href="#safety" onclick="scrollToSection(event, 'safety')">Safety Tips</a>
+        <a href="#team" onclick="scrollToSection(event, 'team')">Project Team</a>
+        <div id="auth-buttons" style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="openBookingModal(1)" class="btn btn-primary btn-sm">🚀 Book Refill</button>
+          <button onclick="openTrackingModal('BK-2026-9042')" class="btn btn-secondary-subtle btn-sm">📍 Track Order</button>
+          <button onclick="openAdminModal()" class="btn btn-outline btn-sm">🛡️ Admin</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">⚡ Real-Time Online LPG Cylinder Booking & Tracking System</div>
+      <h1 class="hero-title">Book Your LPG Cylinder in Seconds. Fast, Safe & Subsidized.</h1>
+      <p class="hero-subtitle">
+        Say goodbye to long queues and paper receipts. Register online, order your domestic or commercial refill, track live doorstep delivery with automated radar updates, and enjoy direct DBT government subsidies.
+      </p>
+      <div class="hero-cta">
+        <button onclick="openBookingModal(1)" class="btn btn-primary btn-lg">🚀 Instant Refill Booking</button>
+        <button onclick="openTrackingModal('BK-2026-9042')" class="btn btn-secondary btn-lg">📍 Track Active Order</button>
+        <button onclick="openPaymentDemoModal()" class="btn btn-outline btn-lg">💳 Payment Gateway</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <h3>24-48 Hrs</h3>
+          <p>Doorstep Delivery Guarantee</p>
+        </div>
+        <div class="stat-item">
+          <h3>₹200</h3>
+          <p>Instant Direct DBT Subsidy</p>
+        </div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Safety Verified Cylinders</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cylinders Catalog Section -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Available Cylinder Types</h2>
+        <p>Choose from our certified range of domestic, commercial, and portable LPG cylinders.</p>
+      </div>
+      <div class="cards-grid" id="cylinder-catalog-grid">
+        <!-- Rendered by embedded JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Section (Interactive & Clickable) -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="hero-badge" style="margin-bottom: 10px;">⚡ 100% Interactive Features</span>
+        <h2>Key Features of Smart Cylinder</h2>
+        <p>Explore the end-to-end automated modules designed to modernize consumer LPG distribution.</p>
+      </div>
+      <div class="features-grid">
+        
+        <!-- Feature 1: Instant Booking -->
+        <div class="feature-card-clickable" onclick="openBookingModal(1)" title="Click to Book a Refill">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span style="font-size: 36px;">📱</span>
+            <span class="badge badge-popular">Live Refill</span>
+          </div>
+          <h4>Instant 1-Click Refill Booking</h4>
+          <p>Select your domestic 14.2kg or commercial 19kg cylinder, pick preferred delivery slots, and book in under 30 seconds.</p>
+          <div class="feature-action-btn">
+            <span>🚀 Book Refill Online</span> →
+          </div>
+        </div>
+
+        <!-- Feature 2: Live Tracking -->
+        <div class="feature-card-clickable" onclick="openTrackingModal('BK-2026-9042')" title="Click to View Live Radar Map">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span style="font-size: 36px;">📍</span>
+            <span class="badge badge-confirmed">Live Stepper</span>
+          </div>
+          <h4>Real-Time Delivery Tracking</h4>
+          <p>Watch your cylinder journey from order acceptance, bottling depot dispatch, to doorstep delivery with assigned driver contact.</p>
+          <div class="feature-action-btn">
+            <span>🗺️ Track Live Delivery</span> →
+          </div>
+        </div>
+
+        <!-- Feature 3: Payment Gateway -->
+        <div class="feature-card-clickable" onclick="openPaymentDemoModal()" title="Click to Test Payment Gateway">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span style="font-size: 36px;">💳</span>
+            <span class="badge badge-delivered">Multi-Mode</span>
+          </div>
+          <h4>Secure Instant Payments</h4>
+          <p>Seamless checkout via dynamic UPI QR code (Google Pay, PhonePe, Paytm), Debit/Credit Cards, Net Banking, or Pay on Delivery (COD).</p>
+          <div class="feature-action-btn">
+            <span>📲 Test Payment Gateway</span> →
+          </div>
+        </div>
+
+        <!-- Feature 4: GST Invoices -->
+        <div class="feature-card-clickable" onclick="openInvoiceModal('BK-2026-9041')" title="Click to View & Print Tax Bill">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span style="font-size: 36px;">🧾</span>
+            <span class="badge badge-dispatched">Print Ready</span>
+          </div>
+          <h4>Instant Computerized Bill & Receipt</h4>
+          <p>Download, view, and print official computerized tax invoices for accounting, subsidy tracking, and household records.</p>
+          <div class="feature-action-btn">
+            <span>🖨️ View & Print Sample Bill</span> →
+          </div>
+        </div>
+
+        <!-- Feature 5: DBTL Subsidy -->
+        <div class="feature-card-clickable" onclick="openSubsidyModal()" title="Click to Check Subsidy Benefit">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span style="font-size: 36px;">💰</span>
+            <span class="badge badge-delivered">₹200 Off</span>
+          </div>
+          <h4>Direct Benefit Transfer (DBTL)</h4>
+          <p>Eligible households receive direct ₹200 government subsidy discount per refill automatically credited on bill generation.</p>
+          <div class="feature-action-btn">
+            <span>🏷️ Check Subsidy Rules</span> →
+          </div>
+        </div>
+
+        <!-- Feature 6: Admin Operations -->
+        <div class="feature-card-clickable" onclick="openAdminModal()" title="Click to Open Admin Portal">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span style="font-size: 36px;">🛡️</span>
+            <span class="badge badge-popular">Admin Panel</span>
+          </div>
+          <h4>Operations & Stock Logistics</h4>
+          <p>Comprehensive agency dashboard for live order fulfillment, driver dispatch, consumer verification, and inventory replenishment.</p>
+          <div class="feature-action-btn">
+            <span>🔐 Access Admin Portal</span> →
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety Tips Section -->
+  <section id="safety">
+    <div class="container">
+      <div class="section-header">
+        <h2>LPG Safety & Precaution Guidelines</h2>
+        <p>Follow standard statutory safety norms to keep your family and home protected.</p>
+      </div>
+      <div class="safety-grid">
+        <div class="safety-card">
+          <span class="safety-icon">👃</span>
+          <h4>Gas Leakage Precautions</h4>
+          <p>If you detect the pungent smell of Ethyl Mercaptan, do not switch electrical appliances ON or OFF. Extinguish all open flames and open windows immediately.</p>
+        </div>
+        <div class="safety-card">
+          <span class="safety-icon">🛡️</span>
+          <h4>Check Safety Seal & Tare Weight</h4>
+          <p>Ensure the white plastic safety cap and hologram seal are intact upon delivery. Verify the tare weight stamped on cylinder stay-plate collar.</p>
+        </div>
+        <div class="safety-card">
+          <span class="safety-icon">🔝</span>
+          <h4>Always Keep Upright</h4>
+          <p>Store cylinders vertically on a flat, firm surface at ground level. Never store cylinders horizontally or in confined basements.</p>
+        </div>
+        <div class="safety-card">
+          <span class="safety-icon">🚨</span>
+          <h4>Emergency Helpline: 1906</h4>
+          <p>Dial national 24-hour toll-free emergency helpline 1906 for instant technical assistance and leak response team dispatch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Team Section -->
+  <section id="team" class="team-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Project Design & Engineering Team</h2>
+        <p>Academic Project Design Report (PDR) - Smart Cylinder Booking System</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="avatar">AS</div>
+          <h4>Avanya Sinha</h4>
+          <span style="color: var(--primary); font-weight: 700;">Frontend & UI/UX Design</span>
+          <span style="font-size: 11px; margin-top: 4px;">User Experience, HTML5/CSS3, Client Interaction</span>
+        </div>
+        <div class="team-card">
+          <div class="avatar">MK</div>
+          <h4>Mansi Kumari</h4>
+          <span style="color: var(--primary); font-weight: 700;">Database Engineering & SQL</span>
+          <span style="font-size: 11px; margin-top: 4px;">Schema Architecture, Indexing, Transactions</span>
+        </div>
+        <div class="team-card">
+          <div class="avatar">DK</div>
+          <h4>Deepshikha Kumari</h4>
+          <span style="color: var(--primary); font-weight: 700;">Backend Java Servlets Logic</span>
+          <span style="font-size: 11px; margin-top: 4px;">MVC Controllers, DAO Layer, Payment Handler</span>
+        </div>
+        <div class="team-card">
+          <div class="avatar">CG</div>
+          <h4>Chanchal Goyal</h4>
+          <span style="font-weight: 600;">System Analysis & Modeling</span>
+          <span style="font-size: 11px; margin-top: 4px;">DFD Level 0/1, ER Diagrams, Requirement Specs</span>
+        </div>
+        <div class="team-card">
+          <div class="avatar">KK</div>
+          <h4>Kashish Kumari</h4>
+          <span style="font-weight: 600;">Testing & Quality Assurance</span>
+          <span style="font-size: 11px; margin-top: 4px;">Functional Test Cases, Validation, Boundary Testing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Smart Cylinder Booking System. Designed for Academic Submission & Live Cloud Deployment.</p>
+      <div class="footer-links">
+        <a href="#services" onclick="scrollToSection(event, 'services')">Catalog</a>
+        <a href="#features" onclick="scrollToSection(event, 'features')">Features</a>
+        <a href="#team" onclick="scrollToSection(event, 'team')">Engineering Team</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       INTERACTIVE MODALS
+       ========================================================================= -->
+
+  <!-- Modal 1: Instant Refill Booking -->
+  <div id="booking-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="close-modal-btn" onclick="closeModal('booking-modal')">✕</button>
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+        <span style="font-size: 26px;">🚀</span>
+        <h3 style="font-size: 20px;">Book Refill Cylinder</h3>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+        Fast doorstep LPG delivery with computerized tax receipt and automatic DBTL government subsidy calculation.
+      </p>
+      
+      <form id="refill-form" onsubmit="handleRefillSubmit(event)">
+        <div class="form-group">
+          <label>Select Cylinder Type *</label>
+          <select id="modal-cylinder-select" class="form-control" onchange="updateBookingPrice()">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Consumer LPG Number / ID *</label>
+          <input type="text" id="modal-consumer-no" class="form-control" value="LPG-10029384" required>
+        </div>
+
+        <div class="form-group">
+          <label>Delivery Address *</label>
+          <input type="text" id="modal-address" class="form-control" value="House #42, Sector 14, Near City Park" required>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Delivery Slot *</label>
+          <select id="modal-slot" class="form-control">
+            <option>Morning (08:00 AM - 12:00 PM)</option>
+            <option selected>Afternoon (12:00 PM - 04:00 PM)</option>
+            <option>Evening (04:00 PM - 08:00 PM)</option>
+          </select>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 14px; border-radius: var(--radius-md); margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
+            <span>Standard Cylinder Price:</span>
+            <strong id="price-subtotal">₹1,050.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; color: var(--success);">
+            <span>Direct Govt DBT Subsidy:</span>
+            <strong id="price-subsidy">-₹200.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; border-top: 1px dashed #cbd5e1; padding-top: 8px;">
+            <span>Total Payable:</span>
+            <strong id="price-total" style="color: var(--primary);">₹850.00</strong>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('booking-modal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm & Book Now →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Live Order Radar Tracking -->
+  <div id="tracking-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="close-modal-btn" onclick="closeModal('tracking-modal')">✕</button>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 26px;">📍</span>
+          <div>
+            <h3 style="font-size: 18px;">Live Delivery Tracking</h3>
+            <p style="font-size: 12px; color: var(--text-muted);">Order Ref: <strong id="track-order-ref">BK-2026-9042</strong></p>
+          </div>
+        </div>
+        <span class="badge badge-dispatched" id="track-status-badge">OUT FOR DELIVERY</span>
+      </div>
+
+      <!-- Radar Animation Box -->
+      <div style="background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: var(--radius-md); padding: 18px; color: white; margin-bottom: 20px; position: relative; overflow: hidden;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 11px; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px;">Live Radar Status</span>
+            <h4 style="font-size: 16px; color: #38bdf8; margin-top: 2px;">Delivery Van En Route 🚚</h4>
+            <p style="font-size: 12px; color: #cbd5e1; margin-top: 4px;">Assigned Driver: <strong>Ramesh Kumar (Van #DL-4C-8891)</strong></p>
+            <p style="font-size: 12px; color: #cbd5e1;">Driver Phone: <strong>+91 98765-43210</strong></p>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 11px; color: #94a3b8;">Est. Doorstep Arrival</span>
+            <div style="font-size: 22px; font-weight: 800; color: #4ade80;">25 Mins</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stepper -->
+      <div class="stepper">
+        <div class="step-item completed">
+          <div class="step-icon">✓</div>
+          <div class="step-info">
+            <h5>1. Booking Confirmed & Verified</h5>
+            <p>Order accepted by Bharat Gas Regional Bottling Plant.</p>
+          </div>
+        </div>
+        <div class="step-item completed">
+          <div class="step-icon">✓</div>
+          <div class="step-info">
+            <h5>2. Safety Inspection & Weight Check</h5>
+            <p>Tare weight stamped 14.2kg verified with leak test pass.</p>
+          </div>
+        </div>
+        <div class="step-item completed">
+          <div class="step-info" style="margin-left: 50px;"></div>
+        </div>
+        <div class="step-item active">
+          <div class="step-icon">🚚</div>
+          <div class="step-info">
+            <h5>3. Dispatched & Out for Doorstep Delivery</h5>
+            <p>Cylinder loaded on truck #DL-4C-8891. Driver on delivery route.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-icon">4</div>
+          <div class="step-info">
+            <h5>4. Doorstep Delivery & OTP Verification</h5>
+            <p>Cash/UPI collection & physical seal handover.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 14px;">
+        <button class="btn btn-sm btn-outline" onclick="openInvoiceModal('BK-2026-9042')">🧾 View Bill</button>
+        <button class="btn btn-sm btn-primary" onclick="closeModal('tracking-modal')">Close Tracker</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Payment Gateway Demo -->
+  <div id="payment-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 500px;">
+      <button class="close-modal-btn" onclick="closeModal('payment-modal')">✕</button>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+        <span style="font-size: 26px;">💳</span>
+        <h3 style="font-size: 18px;">Multi-Mode Payment Gateway</h3>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+        Choose your preferred instant payment method to settle refill booking <strong>BK-2026-9042</strong>:
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+        <!-- UPI -->
+        <div style="padding: 14px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: var(--radius-md); cursor: pointer;" onclick="simulatePaymentSuccess('UPI')">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 24px;">📱</span>
+              <div>
+                <strong>UPI Dynamic QR / Apps</strong>
+                <p style="font-size: 12px; color: var(--text-muted);">Google Pay, PhonePe, Paytm, BHIM</p>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-primary">Pay ₹850</button>
+          </div>
+        </div>
+
+        <!-- Cards -->
+        <div style="padding: 14px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: var(--radius-md); cursor: pointer;" onclick="simulatePaymentSuccess('Card')">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 24px;">💳</span>
+              <div>
+                <strong>Debit & Credit Cards</strong>
+                <p style="font-size: 12px; color: var(--text-muted);">Visa, MasterCard, RuPay (256-bit SSL)</p>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline">Pay ₹850</button>
+          </div>
+        </div>
+
+        <!-- COD -->
+        <div style="padding: 14px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: var(--radius-md); cursor: pointer;" onclick="simulatePaymentSuccess('COD')">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 24px;">💵</span>
+              <div>
+                <strong>Pay on Delivery (COD)</strong>
+                <p style="font-size: 12px; color: var(--text-muted);">Pay cash or scan driver's QR upon arrival</p>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline">Select COD</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end;">
+        <button class="btn btn-outline" onclick="closeModal('payment-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Computerized GST Invoice -->
+  <div id="invoice-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 600px;">
+      <button class="close-modal-btn no-print" onclick="closeModal('invoice-modal')">✕</button>
+      
+      <div style="border-bottom: 2px solid var(--primary); padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <h2 style="font-size: 20px; color: var(--primary);">🔥 Smart Cylinder Gas Agency</h2>
+          <p style="font-size: 11px; color: var(--text-muted);">Authorized LPG Distributor | GSTIN: 07AAAAA0000A1Z5</p>
+          <p style="font-size: 11px; color: var(--text-muted);">1906 Emergency Toll Free Helpline</p>
+        </div>
+        <div style="text-align: right;">
+          <span class="badge badge-delivered">TAX INVOICE</span>
+          <p style="font-size: 12px; font-weight: 700; margin-top: 4px;" id="inv-bill-no">INV-2026-9041</p>
+          <p style="font-size: 11px; color: var(--text-muted);" id="inv-date">Today</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; font-size: 12px;">
+        <div style="background: #f8fafc; padding: 10px; border-radius: 6px;">
+          <strong style="color: var(--secondary);">Customer Details:</strong>
+          <p style="margin-top: 4px;"><strong>Rahul Sharma</strong></p>
+          <p>Consumer ID: LPG-10029384</p>
+          <p>Phone: +91 98765-43210</p>
+          <p>House #42, Sector 14, City Park</p>
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-radius: 6px;">
+          <strong style="color: var(--secondary);">Order & Delivery Details:</strong>
+          <p style="margin-top: 4px;">Booking Ref: <strong>BK-2026-9041</strong></p>
+          <p>Status: <span style="color: var(--success); font-weight: bold;">DELIVERED & VERIFIED</span></p>
+          <p>Cylinder: 14.2kg Domestic (Subsidized)</p>
+          <p>Payment: UPI (Txn: UPI-TXN-882910)</p>
+        </div>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 16px;">
+        <thead>
+          <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1; text-align: left;">
+            <th style="padding: 8px;">Description</th>
+            <th style="padding: 8px; text-align: center;">Qty</th>
+            <th style="padding: 8px; text-align: right;">Basic Rate</th>
+            <th style="padding: 8px; text-align: right;">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 8px;">
+              <strong>Domestic LPG Refill (14.2 Kg)</strong>
+              <div style="font-size: 10px; color: var(--text-muted);">HSN Code: 27111900 | Cyl Tare Wt: 15.3kg</div>
+            </td>
+            <td style="padding: 8px; text-align: center;">1</td>
+            <td style="padding: 8px; text-align: right;">₹1,000.00</td>
+            <td style="padding: 8px; text-align: right;">₹1,000.00</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0; color: var(--text-muted);">
+            <td style="padding: 6px 8px;">CGST (2.5%)</td>
+            <td></td>
+            <td></td>
+            <td style="padding: 6px 8px; text-align: right;">₹25.00</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0; color: var(--text-muted);">
+            <td style="padding: 6px 8px;">SGST (2.5%)</td>
+            <td></td>
+            <td></td>
+            <td style="padding: 6px 8px; text-align: right;">₹25.00</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0; color: var(--success); font-weight: bold;">
+            <td style="padding: 6px 8px;">Direct Benefit Transfer (DBTL) Subsidy Discount</td>
+            <td></td>
+            <td></td>
+            <td style="padding: 6px 8px; text-align: right;">-₹200.00</td>
+          </tr>
+          <tr style="background: #fff7ed; font-size: 14px; font-weight: 800;">
+            <td style="padding: 10px 8px; color: var(--primary);">Net Amount Paid</td>
+            <td></td>
+            <td></td>
+            <td style="padding: 10px 8px; text-align: right; color: var(--primary);">₹850.00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="font-size: 11px; color: var(--text-muted); text-align: center; margin-bottom: 16px;">
+        * This is a computer generated tax invoice. No signature required. Thank you for using Smart Cylinder!
+      </div>
+
+      <div class="no-print" style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn btn-outline" onclick="closeModal('invoice-modal')">Close</button>
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Invoice</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: DBTL Subsidy Rules -->
+  <div id="subsidy-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 520px;">
+      <button class="close-modal-btn" onclick="closeModal('subsidy-modal')">✕</button>
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+        <span style="font-size: 26px;">💰</span>
+        <h3 style="font-size: 18px;">Direct Benefit Transfer (DBTL) Subsidy</h3>
+      </div>
+      <div style="background: var(--success-light); border: 1px solid #a7f3d0; padding: 14px; border-radius: var(--radius-md); margin-bottom: 16px;">
+        <strong style="color: #065f46; font-size: 14px;">Instant ₹200 Subsidy Discount Per Refill!</strong>
+        <p style="font-size: 13px; color: #047857; margin-top: 4px;">
+          Under the PAHAL (DBTL) government scheme, eligible domestic consumers receive ₹200 direct subsidy deduction on 14.2kg refills.
+        </p>
+      </div>
+      <h4 style="font-size: 14px; margin-bottom: 8px;">Key Subsidy Guidelines:</h4>
+      <ul style="font-size: 13px; color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.8;">
+        <li>Aadhaar card must be mapped with bank account and active LPG Consumer ID.</li>
+        <li>Applicable on up to 12 refills per domestic household per financial year.</li>
+        <li>Non-subsidized commercial cylinders (19kg & 47.5kg) do not qualify.</li>
+        <li>Instant computerized receipts display gross price, tax components, and DBTL relief.</li>
+      </ul>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn btn-outline" onclick="closeModal('subsidy-modal')">Close</button>
+        <button class="btn btn-primary" onclick="closeModal('subsidy-modal'); openBookingModal(1);">Book Subsidized Refill →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Admin Operations Control Panel -->
+  <div id="admin-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 650px;">
+      <button class="close-modal-btn" onclick="closeModal('admin-modal')">✕</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 26px;">🛡️</span>
+          <div>
+            <h3 style="font-size: 18px;">Admin Operations & Stock Portal</h3>
+            <span style="font-size: 11px; color: var(--text-muted);">Logged in as: <strong>Admin (Operations Depot)</strong></span>
+          </div>
+        </div>
+        <span class="badge badge-popular">LIVE AGENCY</span>
+      </div>
+
+      <!-- Quick Metrics -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
+        <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-md); text-align: center;">
+          <span style="font-size: 11px; color: var(--text-muted);">14.2kg Domestic Stock</span>
+          <h4 style="font-size: 20px; color: var(--primary);" id="stock-14kg">145 Units</h4>
+        </div>
+        <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-md); text-align: center;">
+          <span style="font-size: 11px; color: var(--text-muted);">19kg Commercial</span>
+          <h4 style="font-size: 20px; color: var(--secondary);" id="stock-19kg">68 Units</h4>
+        </div>
+        <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-md); text-align: center;">
+          <span style="font-size: 11px; color: var(--text-muted);">Active Orders</span>
+          <h4 style="font-size: 20px; color: var(--success);" id="active-orders-count">4 Refills</h4>
+        </div>
+      </div>
+
+      <h4 style="font-size: 14px; margin-bottom: 10px;">Recent Bookings & Dispatch Controls:</h4>
+      <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 20px; font-size: 12px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead style="background: #f1f5f9; text-align: left;">
+            <tr>
+              <th style="padding: 8px;">Order Ref</th>
+              <th style="padding: 8px;">Consumer</th>
+              <th style="padding: 8px;">Cylinder</th>
+              <th style="padding: 8px;">Status</th>
+              <th style="padding: 8px; text-align: center;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-orders-tbody">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn btn-outline" onclick="closeModal('admin-modal')">Close</button>
+        <button class="btn btn-primary" onclick="simulateRestock()">📦 Restock 50 Cylinders</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <!-- =========================================================================
+       SELF-CONTAINED JAVASCRIPT ENGINE & LOGIC
+       ========================================================================= -->
+  <script>
+    // Master In-Memory & LocalStorage Data Engine
+    const CYLINDER_DATA = [
+      {
+        id: 1,
+        type: 'Domestic LPG (Subsidized)',
+        weight: 14.2,
+        price: 850,
+        regularPrice: 1050,
+        subsidy: 200,
+        stock: 145,
+        desc: 'Standard domestic gas cylinder for household cooking with direct bank DBT subsidy benefit.',
+        icon: '🛢️',
+        popular: true
+      },
+      {
+        id: 2,
+        type: 'Domestic LPG (Non-Subsidized)',
+        weight: 14.2,
+        price: 1050,
+        regularPrice: 1050,
+        subsidy: 0,
+        stock: 180,
+        desc: 'Non-subsidized standard domestic cylinder for multiple connections or commercial home usage.',
+        icon: '🛢️',
+        popular: false
+      },
+      {
+        id: 3,
+        type: 'Commercial LPG Cylinder',
+        weight: 19.0,
+        price: 1850,
+        regularPrice: 1850,
+        subsidy: 0,
+        stock: 68,
+        desc: 'Heavy duty high-pressure cylinder designed for restaurants, canteens, dhabas and catering.',
+        icon: '🏭',
+        popular: false
+      },
+      {
+        id: 4,
+        type: 'Chhotu Mini Cylinder',
+        weight: 5.0,
+        price: 390,
+        regularPrice: 390,
+        subsidy: 0,
+        stock: 92,
+        desc: 'Handy and portable 5kg cylinder without address proof requirement. Ideal for bachelors & students.',
+        icon: '🎒',
+        popular: false
+      },
+      {
+        id: 5,
+        type: 'Industrial Jumbo Cylinder',
+        weight: 47.5,
+        price: 4550,
+        regularPrice: 4550,
+        subsidy: 0,
+        stock: 25,
+        desc: 'Massive capacity 47.5kg cylinder for industrial plants, commercial bakeries, and large hotels.',
+        icon: '🏢',
+        popular: false
+      }
+    ];
+
+    let liveOrders = [
+      { ref: 'BK-2026-9042', consumer: 'Rahul Sharma', cyl: '14.2kg Subsidized', status: 'OUT_FOR_DELIVERY', amount: 850 },
+      { ref: 'BK-2026-9041', consumer: 'Rahul Sharma', cyl: '14.2kg Subsidized', status: 'DELIVERED', amount: 850 },
+      { ref: 'BK-2026-9039', consumer: 'Priya Verma', cyl: '19.0kg Commercial', status: 'CONFIRMED', amount: 1850 },
+      { ref: 'BK-2026-9038', consumer: 'Amit Patel', cyl: '5.0kg Chhotu', status: 'DISPATCHED', amount: 390 }
+    ];
+
+    // Smooth scroll for anchor navigation
+    function scrollToSection(event, sectionId) {
+      if (event) event.preventDefault();
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.style.transition = 'background-color 0.4s ease';
+        const originalBg = target.style.backgroundColor;
+        target.style.backgroundColor = '#fff7ed';
+        setTimeout(() => {
+          target.style.backgroundColor = originalBg || '';
+        }, 1200);
+      }
+    }
+
+    // Modal Controllers
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('active');
+    }
+
+    // Toast notification
+    function showToast(message, icon = '✅') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // Render Cylinder Catalog Cards
+    function renderCylinderCatalog() {
+      const container = document.getElementById('cylinder-catalog-grid');
+      const select = document.getElementById('modal-cylinder-select');
+      
+      if (!container) return;
+
+      container.innerHTML = CYLINDER_DATA.map(c => `
+        <div class="cylinder-card ${c.popular ? 'featured' : ''}">
+          ${c.popular ? '<span class="badge badge-popular">Most Popular</span>' : ''}
+          <div class="cylinder-icon">${c.icon}</div>
+          <h3>${c.type}</h3>
+          <div class="weight-tag">${c.weight} kg Net Weight</div>
+          <p class="price">₹${c.price.toLocaleString('en-IN')} <span>/ Refill</span></p>
+          <p class="subsidy-note">${c.subsidy > 0 ? `Includes ₹${c.subsidy} Direct Govt Subsidy` : 'Standard Commercial / Domestic Rate'}</p>
+          <ul class="features-list">
+            <li>✔️ ${c.desc}</li>
+            <li>✔️ Certified ISI safety rubber ring & valve</li>
+            <li>✔️ Available in stock: <strong>${c.stock} units</strong></li>
+          </ul>
+          <button onclick="openBookingModal(${c.id})" class="btn ${c.popular ? 'btn-primary' : 'btn-outline'} btn-block">
+            Book ${c.weight}kg Refill
+          </button>
+        </div>
+      `).join('');
+
+      if (select) {
+        select.innerHTML = CYLINDER_DATA.map(c => `
+          <option value="${c.id}">${c.type} - ${c.weight}kg (₹${c.price})</option>
+        `).join('');
+      }
+    }
+
+    // Booking Modal
+    function openBookingModal(cylId = 1) {
+      const select = document.getElementById('modal-cylinder-select');
+      if (select) select.value = cylId;
+      updateBookingPrice();
+      openModal('booking-modal');
+    }
+
+    function updateBookingPrice() {
+      const select = document.getElementById('modal-cylinder-select');
+      const cyl = CYLINDER_DATA.find(c => c.id === parseInt(select.value)) || CYLINDER_DATA[0];
+      
+      document.getElementById('price-subtotal').innerText = '₹' + cyl.regularPrice.toFixed(2);
+      document.getElementById('price-subsidy').innerText = cyl.subsidy > 0 ? `-₹${cyl.subsidy.toFixed(2)}` : '₹0.00';
+      document.getElementById('price-total').innerText = '₹' + cyl.price.toFixed(2);
+    }
+
+    function handleRefillSubmit(e) {
+      e.preventDefault();
+      const select = document.getElementById('modal-cylinder-select');
+      const cyl = CYLINDER_DATA.find(c => c.id === parseInt(select.value)) || CYLINDER_DATA[0];
+      const consumerNo = document.getElementById('modal-consumer-no').value;
+      const ref = 'BK-2026-' + Math.floor(1000 + Math.random() * 9000);
+
+      // Decrement stock
+      if (cyl.stock > 0) cyl.stock--;
+      renderCylinderCatalog();
+
+      // Add to live orders
+      liveOrders.unshift({
+        ref: ref,
+        consumer: 'Rahul Sharma (' + consumerNo + ')',
+        cyl: cyl.weight + 'kg ' + cyl.type.split(' ')[0],
+        status: 'CONFIRMED',
+        amount: cyl.price
+      });
+
+      closeModal('booking-modal');
+      showToast(`Refill booked successfully! Ref: ${ref}`);
+
+      setTimeout(() => {
+        openTrackingModal(ref);
+      }, 700);
+    }
+
+    // Tracking Modal
+    function openTrackingModal(ref = 'BK-2026-9042') {
+      const order = liveOrders.find(o => o.ref === ref) || liveOrders[0];
+      document.getElementById('track-order-ref').innerText = order.ref;
+      
+      const badge = document.getElementById('track-status-badge');
+      badge.innerText = order.status.replace(/_/g, ' ');
+      badge.className = 'badge ' + (order.status === 'DELIVERED' ? 'badge-delivered' : 'badge-dispatched');
+
+      openModal('tracking-modal');
+    }
+
+    // Payment Modal
+    function openPaymentDemoModal() {
+      openModal('payment-modal');
+    }
+
+    function simulatePaymentSuccess(method) {
+      closeModal('payment-modal');
+      showToast(`Payment of ₹850 via ${method} verified! Receipt generated.`, '💳');
+      setTimeout(() => {
+        openInvoiceModal('BK-2026-9042');
+      }, 600);
+    }
+
+    // Invoice Modal
+    function openInvoiceModal(ref = 'BK-2026-9041') {
+      document.getElementById('inv-bill-no').innerText = 'INV-' + ref.replace('BK-', '');
+      document.getElementById('inv-date').innerText = new Date().toLocaleDateString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric'
+      });
+      openModal('invoice-modal');
+    }
+
+    // Subsidy Modal
+    function openSubsidyModal() {
+      openModal('subsidy-modal');
+    }
+
+    // Admin Operations Modal
+    function openAdminModal() {
+      renderAdminOrders();
+      openModal('admin-modal');
+    }
+
+    function renderAdminOrders() {
+      const tbody = document.getElementById('admin-orders-tbody');
+      if (!tbody) return;
+
+      tbody.innerHTML = liveOrders.map(o => `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 8px;"><strong>${o.ref}</strong></td>
+          <td style="padding: 8px;">${o.consumer}</td>
+          <td style="padding: 8px;">${o.cyl}</td>
+          <td style="padding: 8px;">
+            <span class="badge ${o.status === 'DELIVERED' ? 'badge-delivered' : o.status === 'CONFIRMED' ? 'badge-confirmed' : 'badge-dispatched'}">
+              ${o.status.replace(/_/g, ' ')}
+            </span>
+          </td>
+          <td style="padding: 8px; text-align: center;">
+            ${o.status !== 'DELIVERED' ? 
+              `<button class="btn btn-sm btn-outline" onclick="toggleOrderStatus('${o.ref}')">Mark Delivered</button>` :
+              `<span style="color: var(--success); font-weight: bold;">Completed</span>`
+            }
+          </td>
+        </tr>
+      `).join('');
+
+      document.getElementById('active-orders-count').innerText = liveOrders.filter(o => o.status !== 'DELIVERED').length + ' Active';
+    }
+
+    function toggleOrderStatus(ref) {
+      const order = liveOrders.find(o => o.ref === ref);
+      if (order) {
+        order.status = 'DELIVERED';
+        renderAdminOrders();
+        showToast(`Order ${ref} marked as DELIVERED!`);
+      }
+    }
+
+    function simulateRestock() {
+      CYLINDER_DATA.forEach(c => c.stock += 20);
+      document.getElementById('stock-14kg').innerText = CYLINDER_DATA[0].stock + ' Units';
+      document.getElementById('stock-19kg').innerText = CYLINDER_DATA[2].stock + ' Units';
+      renderCylinderCatalog();
+      showToast('Inventory replenished: +20 units added to each cylinder type!');
+    }
+
+    // Close modal when clicking on backdrop
+    window.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('active');
+      }
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+      }
+    });
+
+    // Initialize application on load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCylinderCatalog();
+    });
+  </script>
+</body>
+</html>
